@@ -2,7 +2,8 @@
 
 import { _download } from "./downloader";
 
-const serverUrl = "https://nk-io.herokuapp.com";
+//const serverUrl = window.location.protocol + "//" + window.location.host;
+const serverUrl = "http://localhost:8080";
 
 let token;
 const setToken = (t)  => {
@@ -79,7 +80,6 @@ const post = async (path, body) => {
 };
 
 const http = {
-    url : serverUrl,
     get,
     post,
     download,
