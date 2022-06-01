@@ -81,6 +81,7 @@ const post = async (path, body) => {
 };
 
 const http = {
+    url : serverUrl,
     get,
     post,
     download,
