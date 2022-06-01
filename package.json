@@ -14,7 +14,7 @@
         "jest-coverage-badges": "^1.0.0",
         "jsdoc": "^3.6.10",
         "jwt-decode": "^3.1.2",
-        "react": "^17.0.2",
+        "react": "^18.0.2",
         "react-bootstrap": "^2.2.3",
         "react-confetti": "^6.0.1",
         "react-datepicker": "^4.7.0",
