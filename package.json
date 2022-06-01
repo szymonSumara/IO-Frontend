@@ -63,8 +63,8 @@
         ]
     },
      "engines" : { 
-        "npm" : ">=8.0.0",
-        "node" : ">=16.0.0"
+        "npm" : "=8.1.0",
+        "node" : "=16.13.0"
       },
     "devDependencies": {
         "eslint": "^8.13.0",
