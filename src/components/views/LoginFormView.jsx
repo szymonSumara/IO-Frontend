@@ -20,7 +20,7 @@ function LoginFormView() {
 
         let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         if (!newEmail.match(regexEmail)) 
-            emailError = "Email is no valid";
+            emailError = "Email is not valid";
         else
             emailError = null
         console.log(newEmail,{ ...state ,email:newEmail, emailError})
