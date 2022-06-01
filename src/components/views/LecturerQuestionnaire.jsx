@@ -3,6 +3,7 @@ import SimpleWrapper from "../SimpleWrapper";
 import ViewSwitch from "./ViewSwitch/ViewSwitch";
 import { useParams } from "react-router-dom";
 import FloatingActionButton from "../form/services/FloatingActionButton";
+import http from "../../services/http";
 
 function LecturerQuestionaire() {
     const { id } = useParams();
@@ -16,15 +17,15 @@ function LecturerQuestionaire() {
             <div className="lecturer-questionnaire-buttons">
                 <div>
                     <span>File with user preferences</span>
-                    <a href={`http://localhost:8080/files/preferences/english/${id}`}>download</a>
+                    <a href={ http.url + `/files/preferences/english/${id}`}>download</a>
                 </div>
                 <div>
                     <span>File with user groups </span>
-                    <a href={`http://localhost:8080/files/results/english/${id}`}>download</a>
+                    <a href={http.url + `/files/results/english/${id}`}>download</a>
                 </div>
                 <div>
                     <span>File with user links </span>
-                    <a href={`http://localhost:8080/files/links/${id}`}>download</a>
+                    <a href={http.url + `/files/links/${id}`}>download</a>
                 </div>
             </div>
             <FloatingActionButton />
@@ -33,3 +34,4 @@ function LecturerQuestionaire() {
 }
 
 export default LecturerQuestionaire;
+
