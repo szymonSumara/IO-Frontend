@@ -3,7 +3,7 @@ import http from "../../../services/http";
 import { Spinner } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import TextareaAutosize from "react-textarea-autosize";
-import { DayHeader, TermHeader, GroupBody } from "../../group";
+import { toast } from "react-toastify";
 import "./impossibilities.css";
 import { Submit } from "../../form/basic";
 
@@ -21,6 +21,9 @@ function ImpossibilitiesAcceptance() {
         loading: true,
         decision: []
     });
+    const [inposibilitesState, setImposibilites] = useState({
+        imposibillities: ""
+    });
 
     useEffect(() => {
         (async function () {
@@ -35,7 +38,7 @@ function ImpossibilitiesAcceptance() {
             }
         })();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [id]);
+    }, [id, inposibilitesState]);
 
     function button(mode, key) {
         let newDecision = [...state.decision];
@@ -53,15 +56,40 @@ function ImpossibilitiesAcceptance() {
                 decision.push(state.data.votes[i].id);
             }
         }
-        const response = await http.post(`/impossibilities/${id}`, {
-            deletedImpossibilities: decision
-        });
-        setState({
-            ...state,
-            votes: [],
-            loading: false,
-            decision: []
-        });
+        var response;
+        try {
+          response = await http.post(`/impossibilities/${id}`, {
+              deletedImpossibilities: decision
+          });
+          if (response.ok){
+              toast.success("Impossibilities resolved", {
+                  position: "top-center",
+                  autoClose: 3000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined
+              });
+          }
+          else{
+              toast.error(
+                  "Could not submit your decision.\nTry again later or contact the server administrator.",
+                  {
+                      position: "top-center",
+                      autoClose: 3000,
+                      hideProgressBar: false,
+                      closeOnClick: true,
+                      pauseOnHover: true,
+                      draggable: true,
+                      progress: undefined
+                  }
+              );
+          }
+        } 
+        finally {
+        setImposibilites({...inposibilitesState,imposibillities : "1"})
+        }
     }
 
     return (

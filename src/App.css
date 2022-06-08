@@ -9,14 +9,24 @@
 
 .App-body {
     background-color: var(--bs-gray-300);
-    min-height: calc(100vh - var(--header-h));
+    min-height: 100vh;
     padding: 1em;
+    padding-top: calc(var(--header-h) + 0.5em);
     display: flex;
     justify-content: center;
 }
 
+/* .App-header + .App-body {
+    min-height: calc(100vh - var(--header-h));
+} */
+
 .App-header {
-    background-color: #282c34;
+    margin-top: 0;
+    position: fixed;
+    z-index: 2;
+    width: 100vw;
+    background-color: rgba(40, 44, 52, 0.96);
+    backdrop-filter: blur(5px);
     height: var(--header-h);
     display: flex;
     flex-direction: row;
@@ -25,6 +35,8 @@
     font-size: calc(10px + 2vmin);
     color: white;
     padding: 3em auto;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
 }
 
 .App-header ul {
@@ -32,27 +44,39 @@
     font-size: calc(8px + 1vmin);
     display: flex;
     flex-direction: row;
+    gap: 0;
     margin: 0;
+    padding: 0;
 }
 
 .App-header ul li {
-    margin: 0 1.25em;
     display: flex;
     align-items: center;
-    border-radius: 0.125em;
 }
 
 .App-header a {
     color: white;
+    height: var(--header-h);
     text-decoration: none;
+    padding: 0 1.5em;
+    line-height: normal;
+    display: flex;
+    align-items: center;
+    /* text-transform: uppercase; */
+}
+
+.App-header ul li a {
+    /* height: var(--header-h); */
+    padding: 0 2em;
+    margin: 0;
+    /* min-width: calc(69px + 3em); */
 }
 
 .App-header a:hover {
     opacity: 75%;
-}
-
-.App-header li[data-active="true"] a {
-    text-decoration: underline;
+    background-color: var(--bg-primary);
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.25), 0 1px rgba(255, 255, 255, 0.1);
+    transition: all 200ms ease-in;
 }
 
 label {
@@ -63,22 +87,13 @@ title {
     display: block;
 }
 
-.App-header a {
-    color: white;
-    text-decoration: none;
-}
-
-.App-header a:hover {
-    opacity: 75%;
-    /* text-decoration: underline; */
-}
-
-.App-link {
-    color: #61dafb;
+.list-group-item {
+    padding: 0.5em 0.75em;
 }
 
 .list-group-item span {
     vertical-align: middle;
+    height: 26px;
 }
 
 .rw-time-input-clear > svg {
@@ -95,6 +110,8 @@ title {
     border: none;
     border-radius: 0.1em;
     vertical-align: middle;
+    padding: 0.5rem 0.4rem;
+    font-size: 0.9em;
 }
 
 .dragDropField {
@@ -112,8 +129,9 @@ title {
     justify-content: flex-end;
     flex-direction: row;
     bottom: 3rem;
-    right: 2.5rem;
+    right: 3rem;
     background: linear-gradient(to bottom right, var(--accent-clr-3), var(--accent-clr));
+    /* background-color: var(--accent-clr); */
     border: 0;
     border-radius: 2rem;
     color: white;
@@ -134,7 +152,7 @@ title {
 
 .floatingActionBtn::after {
     content: "\002B";
-    background-color: red;
+    background-color: transparent;
     position: absolute;
     left: 0.45em;
     bottom: 2.25em;
@@ -156,15 +174,96 @@ title {
 }
 .plusIcon {
     font-size: 24px;
-
     text-align: center;
-}
-
-:where(button, input):where(:not(:active)):focus-visible {
-    outline-offset: 5px;
 }
 
 .resultsView h2 {
     text-align: center;
     margin-bottom: 0.75em;
+}
+
+.Toastify__toast-body {
+    white-space: break-spaces !important;
+}
+
+.spinner-border {
+    margin-top: 3rem;
+}
+
+.startPage {
+    margin-top: 1rem;
+}
+
+.btn-light:hover {
+    background-color: rgba(248, 249, 250, 0.8);
+    border-color: rgba(248, 249, 250, 0.8);
+}
+
+.startPage h1 {
+    margin-bottom: 1em;
+}
+
+@media only screen and (max-width: 768px) {
+    .App-body form {
+        width: 90vw !important;
+    }
+
+    .App-header a {
+        padding: 0 0.75em;
+        width: fit-content;
+        white-space: nowrap;
+    }
+
+    .App-header ul li a {
+        padding: 0 1em;
+    }
+
+    .floatingActionBtn {
+        right: 1rem;
+        bottom: 1rem;
+        width: 6rem;
+        line-height: 2.5;
+        font-size: 0.85rem;
+    }
+    .floatingActionBtn::after {
+        font-size: 1rem;
+        bottom: 2.75rem;
+        left: 0.65em;
+    }
+
+    .container-lg {
+        width: 85vw !important;
+        margin-bottom: 3rem !important;
+        padding: 1em !important;
+    }
+
+    .rw-time-input-clear > svg {
+        opacity: 1 !important;
+        color: white;
+    }
+
+    .file-drop-area div.mb-3 {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .file-drop-area div.mb-3 .file-message {
+        display: none;
+    }
+
+    .choose-file-button {
+        text-align: center;
+    }
+
+    .calendar {
+        /* margin: 0 !important; */
+        width: 122% !important;
+        max-width: none;
+        margin-left: -11% !important;
+        margin-right: -11% !important;
+    }
+    .calendar thead .calendar-cell-label {
+        font-size: 9.5px !important;
+        /* text-overflow: ellipsis; */
+    }
 }

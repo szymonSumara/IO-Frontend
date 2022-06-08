@@ -3,14 +3,12 @@
 import { _download } from "./downloader";
 
 //const serverUrl = window.location.protocol + "//" + window.location.host;
-const serverUrl = "https://nk-io.herokuapp.com";
-
+const serverUrl = "http://localhost:8080";
 
 let token;
-const setToken = (t)  => {
-  token = t;
-}
-
+const setToken = (t) => {
+    token = t;
+};
 
 function optionsObjectToString(options) {
     if (!options) return "";
@@ -27,11 +25,17 @@ function optionsObjectToString(options) {
 async function proccesResponse(response, toastComunicat) {
     if (response.ok) {
         // toast.success(`${toastComunicat}`);
-        const data = await response.json();
-
+        var data;
+        try{
+            data = await response.json();
+        }
+        catch(e){
+            console.error(e);
+            data = [];
+        }
         return {
             ok: true,
-            data
+            data: data
         };
     } else {
         const text = await response.json();
@@ -47,9 +51,12 @@ const download = async (path, filename, extension) => {
     const response = await fetch(serverUrl + path, {
         method: "GET",
         headers: {
-            'Content-Type': 'application/json',
-            'auth-token': token,
-        },
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "auth-token": token,
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+        }
     });
     const reader = response.body.getReader();
     var bytes = (await reader.read()).value;
@@ -61,10 +68,12 @@ const get = async (path, options) => {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            'auth-token': token,
+            Accept: "application/json",
+            "auth-token": token,
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
         }
     });
-
     return await proccesResponse(response, "GET " + path);
 };
 
@@ -74,18 +83,42 @@ const post = async (path, body) => {
         body: JSON.stringify(body),
         headers: {
             "Content-Type": "application/json",
-            'auth-token': token,
+            Accept: "application/json",
+            "auth-token": token,
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
         }
     });
+    console.log("response");
+    console.log(response);
     return await proccesResponse(response, "GET " + path);
 };
 
+const deleteH = async (path, body) => {
+    const response = await fetch(serverUrl + path, {
+        method: "DELETE",
+        body: JSON.stringify(body),
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "auth-token": token,
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+        }
+    });
+    if (response.ok) {
+        return { ok: true };
+    } else {
+        return { ok: false };
+    }
+};
+
 const http = {
-    url : serverUrl,
     get,
     post,
     download,
-    setToken
+    setToken,
+    deleteH
 };
 
 export default http;

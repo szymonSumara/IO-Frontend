@@ -1,24 +1,37 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import React from "react";
 
 function StartPage() {
-    return (<>
-    <div>
-    <h1>Informacje dla testerów &#128579;</h1><br />
-        <h2>By zalogować się należy przejść pod <Link to="/login">adres</Link></h2><br />
-        <h4>Przykładowe dane do logowania</h4><br />
-
-        <span><b>Email: </b>jan.profesorski@agh.edu.pl</span><br />
-        <span><b>Hasło: </b>12345</span><br /><br />
-        
-        <span><b>Email: </b>wacław.f@agh.edu.pl</span><br />
-        <span><b>Hasło: </b>12345</span><br />
-
-        <hr />
-        <h4><a href="https://drive.google.com/drive/u/1/folders/1FxCPi9Rt1-W5AgXb_KJUxJQvzgO70fnh">link</a> do dysku z przykładowymi plikami</h4>
-    </div>
-      
-    </>);
+    return (
+        <>
+            <div className="startPage">
+                <h1>Student enrollment &#127891;</h1>
+                <div>
+                    <h3>New poll</h3>
+                    <p>
+                        Quickly create and schedule a new questionnaire for any subject you want.
+                        Select all the terms that suit you.
+                    </p>
+                    <em>Lecturer only. </em>
+                    <em>Remember to upload the file with students information</em>
+                    <hr />
+                    <h3>Your polls</h3>
+                    <p>
+                        Check on your polls and see the feedback provided by your students. Manage,
+                        generate and modify download our groups.
+                    </p>
+                    <em>Lecturer only</em>
+                    <hr />
+                    <h3>Vote</h3>
+                    <p>
+                        Choose the best term for your classes. In case of problems, tap the term one
+                        more time to select impossibility. Remember to give your lecturer
+                        information about that term
+                    </p>
+                    <em>Student only</em>
+                </div>
+            </div>
+        </>
+    );
 }
 
 export default StartPage;
